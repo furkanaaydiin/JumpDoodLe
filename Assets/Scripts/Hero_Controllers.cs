@@ -12,14 +12,16 @@ public class Hero_Controllers : MonoBehaviour
     public float skor;
     public Transform cameraa;
     public GameObject panel;
-   public AudioSource gameOver;
-    public AudioSource zipla;
+   public AudioClip gameOver;
+    public AudioClip zipla;
+    public AudioSource audioSource;
+
+    private bool isDead;
 
 private void Start()
 {
+    isDead = false;
     Time.timeScale = 1;
-    gameOver  = GetComponent<AudioSource>();
-    zipla = GetComponent<AudioSource>();
 }
 
 private void Update()
@@ -30,12 +32,12 @@ private void Update()
     }
     skortext.text = Mathf.Round(skor).ToString();
 
-    if(cameraa.position.y > transform.position.y + 7f)
+    if(cameraa.position.y > transform.position.y + 7f && !isDead)
     {
     Time.timeScale = 0;
     panel.SetActive(true);
-    //gameOver.Play();
-    
+    PlayAudio(gameOver);
+    isDead = true;
     }
     
 
@@ -52,19 +54,23 @@ private void Update()
         SceneManager.LoadScene(0);
     }
 
-    
+    private void PlayAudio(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
     private void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "Metor")
         {
             
             Time.timeScale = 0;
-            gameOver.Play();
+            PlayAudio(gameOver);
             panel.SetActive(true);
         }
         if(col.gameObject.tag == "Platform")
         {
-          //zipla.Play();
+            PlayAudio(zipla);
         }
     }
 
