@@ -12,10 +12,14 @@ public class Hero_Controllers : MonoBehaviour
     public float skor;
     public Transform cameraa;
     public GameObject panel;
+   public AudioSource gameOver;
+    public AudioSource zipla;
 
 private void Start()
 {
     Time.timeScale = 1;
+    gameOver  = GetComponent<AudioSource>();
+    zipla = GetComponent<AudioSource>();
 }
 
 private void Update()
@@ -30,7 +34,10 @@ private void Update()
     {
     Time.timeScale = 0;
     panel.SetActive(true);
+    //gameOver.Play();
+    
     }
+    
 
     
 }
@@ -52,7 +59,12 @@ private void Update()
         {
             
             Time.timeScale = 0;
+            gameOver.Play();
             panel.SetActive(true);
+        }
+        if(col.gameObject.tag == "Platform")
+        {
+          //zipla.Play();
         }
     }
 
