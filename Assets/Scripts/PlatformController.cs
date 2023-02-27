@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Platform_Contollers : MonoBehaviour
+public class PlatformController : MonoBehaviour
 {
 
    private void OnCollisionEnter2D(Collision2D col)
@@ -10,6 +10,6 @@ public class Platform_Contollers : MonoBehaviour
          col.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * 400f);
      }
     
-    }
+   }
   
 }

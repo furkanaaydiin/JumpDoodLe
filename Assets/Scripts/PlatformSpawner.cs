@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner_Conrollers : MonoBehaviour
+public class PlatformSpawner : MonoBehaviour
 { 
      public GameObject prefeb;
      public float speed;
@@ -11,20 +11,20 @@ public class Spawner_Conrollers : MonoBehaviour
      public float interval;  
     void Start()
     {
-        InvokeRepeating("spawner" , interval,interval);
+        InvokeRepeating("Spawner" , interval,interval);
     }
 
     
     void Update()
     {
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        transform.position += Vector3.up * (speed * Time.deltaTime);
 
     }
 
 
-    void spawner()
+    void Spawner()
     {
-        GameObject NewPlatform = Instantiate(prefeb);
+        var NewPlatform = Instantiate(prefeb);
         NewPlatform.transform.position = new Vector2(
         Random.Range(maxX,minX),transform.position.y +
         (Random.Range(0.5f,1f)));

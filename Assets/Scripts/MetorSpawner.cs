@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Metor_Spawner : MonoBehaviour
+public class MetorSpawner : MonoBehaviour
 {
     public GameObject metor;
     public float speed;
@@ -11,18 +11,16 @@ public class Metor_Spawner : MonoBehaviour
     public float interval;
     void Start()
     {
-         InvokeRepeating("Metorspawner" , interval,interval);
+         InvokeRepeating("Spawner" , interval,interval);
     }
-
-    
     void Update()
     {
-       transform.position += Vector3.up * speed * Time.deltaTime;
+       transform.position += Vector3.up * (speed * Time.deltaTime);
     }
 
-    void Metorspawner()
+    private void Spawner()
     {
-        GameObject newMetor = Instantiate(metor);
+        var newMetor = Instantiate(metor);
         newMetor.transform.position = new Vector2(
             Random.Range(maxX,minX),transform.position.y +
             (Random.Range(0.5f,1f))
